@@ -12,7 +12,7 @@ import WatchList from "./WatchList";
 import GeneralContext, { GeneralContextProvider } from "./GeneralContext";
 import BuyActionWindow from "./BuyActionWindow";
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => {
   return (
     <div className="dashboard-container">
       <GeneralContextProvider>
@@ -20,7 +20,7 @@ const Dashboard = () => {
       </GeneralContextProvider>
       <div className="content">
         <Routes>
-          <Route exact path="/" element={<Summary />} />
+           <Route path="/" element={<Summary user={user} />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/holdings" element={<Holdings />} />
           <Route path="/positions" element={<Positions />} />

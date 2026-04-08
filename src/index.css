@@ -844,3 +844,136 @@ hr {
 
 
 
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logout-btn {
+  padding: 5px 10px;
+  border: none;
+  background: red;
+  color: white;
+  cursor: pointer;
+}
+
+.apps-container {
+  padding: 20px;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.app-card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.app-card:hover {
+  background: #f5f5f5;
+}
+.topbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.indices-container {
+  display: flex;
+  gap: 20px;
+}
+
+.menu-container {
+  position: relative;
+}
+
+.menus ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.menu.selected {
+  background: #eee;
+  font-weight: bold;
+}
+
+.profile {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  background: blue;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 50%;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  width: 150px;
+}
+
+.profile-dropdown p {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.profile-dropdown p:hover {
+  background: #f5f5f5;
+}
+.summary-container {
+  padding: 20px;
+}
+
+.username h6 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.section {
+  margin-top: 20px;
+}
+
+.data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.first h3 {
+  margin: 0;
+}
+
+.second p {
+  margin: 5px 0;
+}
+
+.profit {
+  color: green;
+}
+
+.divider {
+  margin: 10px 0;
+}
