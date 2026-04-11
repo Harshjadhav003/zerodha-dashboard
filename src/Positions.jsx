@@ -8,7 +8,7 @@ const Positions = () => {
 
 useEffect(() => {
   console.log("Component mounted");
-  axios.get("http://localhost:3002/allPositions")
+  axios.get("https://docker-setup-backend-latest.onrender.com/allPositions")
     .then((res) => {
       console.log("DATA:", res.data);
       setAllPositions(res.data);
