@@ -15,19 +15,18 @@ const Menu = ({ user }) => {
   };
 
   const handleLogout = async () => {
-    try {
-      await axios.post(
-        "https://docker-setup-backend-latest.onrender.com/logout",
-        {},
-        { withCredentials: true }
-      );
+  try {
+    await axios.post(
+      "https://docker-setup-backend-latest.onrender.com/logout",
+      {},
+      { withCredentials: true }
+    );
 
-      window.location.href = "https://your-frontend-url.onrender.com/login";
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+    window.location.href = "https://zerodha-frontend-gilt.vercel.app/login";
+  } catch (err) {
+    console.error(err);
+  }
+};
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
 
