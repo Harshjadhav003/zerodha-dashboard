@@ -17,13 +17,13 @@ const Home = () => {
         );
 
         if (!data.success) {
-          window.location.href = "https://your-frontend-url.onrender.com/login";
+          window.location.href = "https://zerodha-frontend-gilt.vercel.app/login";
         } else {
           setUser(data.user); //  set username
         }
       } catch (error) {
         console.error(error);
-        window.location.href = "https://your-frontend-url.onrender.com/login";
+        window.location.href = "https://zerodha-frontend-gilt.vercel.app/login";
       }
     };
 
