@@ -17,12 +17,12 @@ const Menu = ({ user }) => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:3002/logout",
+        "https://docker-setup-backend-latest.onrender.com/logout",
         {},
         { withCredentials: true }
       );
 
-      window.location.href = "http://localhost:5173/login";
+      window.location.href = "https://your-frontend-url.onrender.com/login";
     } catch (err) {
       console.error(err);
     }

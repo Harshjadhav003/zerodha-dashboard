@@ -11,19 +11,19 @@ const Home = () => {
     const verifyUser = async () => {
       try {
         const { data } = await axios.post(
-          "http://localhost:3002",
+          "https://docker-setup-backend-latest.onrender.com",
           {},
           { withCredentials: true }
         );
 
         if (!data.success) {
-          window.location.href = "http://localhost:5173/login";
+          window.location.href = "https://your-frontend-url.onrender.com/login";
         } else {
           setUser(data.user); //  set username
         }
       } catch (error) {
         console.error(error);
-        window.location.href = "http://localhost:5173/login";
+        window.location.href = "https://your-frontend-url.onrender.com/login";
       }
     };
 
