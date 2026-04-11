@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Dashboard from "./Dashboard";
@@ -6,33 +7,48 @@ import TopBar from "./TopBar";
 
 const Home = () => {
   const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const verifyUser = async () => {
       try {
         const { data } = await axios.post(
-          "https://docker-setup-backend-latest.onrender.com",
+          "https://docker-setup-backend-latest.onrender.com/verify",
           {},
           { withCredentials: true }
         );
 
         if (!data.success) {
-          window.location.href = "https://zerodha-frontend-gilt.vercel.app/login";
+          navigate("/login");
         } else {
-          setUser(data.user); //  set username
+          setUser(data.user);
         }
       } catch (error) {
         console.error(error);
-        window.location.href = "https://zerodha-frontend-gilt.vercel.app/login";
+        navigate("/login");
       }
     };
 
     verifyUser();
-  }, []);
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "https://docker-setup-backend-latest.onrender.com/logout",
+        {},
+        { withCredentials: true }
+      );
+
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
-      <TopBar user={user} />
+      <TopBar user={user} onLogout={handleLogout} />
       <Dashboard user={user} />
     </>
   );
