@@ -1,16 +1,60 @@
-# React + Vite
+# 📊 Zerodha Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Data visualization service for Zerodha Clone.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+* 📈 Interactive Charts
+* 📊 Stock Data Visualization
+* 💼 Portfolio Analytics
+* ⚡ Real-time UI updates (if implemented)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React.js
+* Chart.js / Recharts
+* Axios
+
+---
+
+## ⚙️ Setup Instructions
+
+```bash
+git clone https://github.com/Harshjadhav003/zerodha-dashboard.git
+cd zerodha-dashboard
+npm install
+npm start
+```
+
+App runs on:
+👉 http://localhost:5174 (or your port)
+
+---
+
+## 📊 Functionality
+
+* Displays stock trends
+* Shows portfolio performance
+* Visualizes trading data
+
+---
+
+## 🔗 Connected Services
+
+* Backend API → provides data
+
+---
+
+## 📌 Notes
+
+* Backend must be running
+* Uses REST APIs
+
+---
+
+👉 Part of Zerodha Microservices Project
+🔗 Main Repo: https://github.com/Harshjadhav003/ZERODHA
