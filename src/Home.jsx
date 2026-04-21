@@ -5,17 +5,20 @@ import axios from "axios";
 import Dashboard from "./Dashboard";
 import TopBar from "./TopBar";
 
+//  global config (cookies)
+axios.defaults.withCredentials = true;
+
 const Home = () => {
   const [user, setUser] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        const { data } = await axios.post(
-          "https://docker-setup-backend-latest.onrender.com/verify",
-          {},
-          { withCredentials: true }
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/verify`
         );
 
         if (!data.success) {
@@ -23,9 +26,12 @@ const Home = () => {
         } else {
           setUser(data.user);
         }
+
       } catch (error) {
         console.error(error);
         navigate("/login");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -35,16 +41,18 @@ const Home = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "https://docker-setup-backend-latest.onrender.com/logout",
-        {},
-        { withCredentials: true }
+        `${import.meta.env.VITE_API_URL}/logout`
       );
 
       navigate("/login");
+
     } catch (error) {
       console.error(error);
     }
   };
+
+  //  prevent UI flicker
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>

@@ -13,16 +13,18 @@ const Menu = ({ user }) => {
   const handleProfileClick = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
-
-  const handleLogout = async () => {
+const handleLogout = async () => {
   try {
     await axios.post(
-      "https://docker-setup-backend-latest.onrender.com/logout",
+      `${import.meta.env.VITE_API_URL}/logout`,
       {},
       { withCredentials: true }
     );
 
-    window.location.href = "https://zerodha-frontend-gilt.vercel.app/login";
+    window.location.replace(
+      `${import.meta.env.VITE_FRONTEND_URL}/login`
+    );
+
   } catch (err) {
     console.error(err);
   }
@@ -98,8 +100,11 @@ const Menu = ({ user }) => {
 
         {/* PROFILE */}
         <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">{user?.slice(0,2).toUpperCase()}</div>
-          <p className="username">{user}</p>
+          <div className="avatar">
+              {user?.username ? user.username.slice(0, 2).toUpperCase() : "U"}
+            </div>
+
+              <p className="username">{user?.username || "User"}</p>
         </div>
 
         {/* DROPDOWN */}

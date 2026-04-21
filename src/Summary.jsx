@@ -6,7 +6,7 @@ const Summary = ({ user }) => {
 
       {/* USER */}
       <div className="username">
-        <h6>Hi, {user || "User"} 👋</h6>
+       <h6>{user?.username}</h6>
         <hr className="divider" />
       </div>
 
