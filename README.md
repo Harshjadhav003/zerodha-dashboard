@@ -56,5 +56,5 @@ App runs on:
 
 ---
 
-👉 Part of Zerodha Microservices Project
+👉  Part of Zerodha Microservices Project
 🔗 Main Repo: https://github.com/Harshjadhav003/ZERODHA
