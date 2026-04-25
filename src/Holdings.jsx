@@ -7,13 +7,11 @@ const Holdings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const BASE_URL = "https://docker-setup-backend-latest.onrender.com";
-
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/allHoldings`)
+      .get(`${import.meta.env.VITE_DATA_API_URL}/holdings`)
       .then((res) => {
-        setAllHoldings(res.data);
+        setAllHoldings(res.data.data);
         setLoading(false);
       })
       .catch((err) => {

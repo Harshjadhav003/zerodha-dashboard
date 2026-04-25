@@ -22,14 +22,14 @@ const Home = () => {
         );
 
         if (!data.success) {
-          navigate("/login");
+          window.location.replace(`${import.meta.env.VITE_FRONTEND_URL}/login`);
         } else {
-          setUser(data.user);
+          setUser({ username: data.user });
         }
 
       } catch (error) {
         console.error(error);
-        navigate("/login");
+        window.location.replace(`${import.meta.env.VITE_FRONTEND_URL}/login`);
       } finally {
         setLoading(false);
       }
@@ -44,7 +44,7 @@ const Home = () => {
         `${import.meta.env.VITE_API_URL}/logout`
       );
 
-      navigate("/login");
+      window.location.replace(`${import.meta.env.VITE_FRONTEND_URL}/login`);
 
     } catch (error) {
       console.error(error);

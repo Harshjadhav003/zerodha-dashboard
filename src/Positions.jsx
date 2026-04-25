@@ -7,11 +7,9 @@ const Positions = () => {
     const [allPositions, setAllPositions] = useState([]);
 
 useEffect(() => {
-  console.log("Component mounted");
-  axios.get("https://docker-setup-backend-latest.onrender.com/allPositions")
+  axios.get(`${import.meta.env.VITE_DATA_API_URL}/positions`)
     .then((res) => {
-      console.log("DATA:", res.data);
-      setAllPositions(res.data);
+      setAllPositions(res.data.data);
     })
     .catch((err) => {
       console.log("ERROR:", err);

@@ -6,9 +6,9 @@ const Orders = () => {
   const [allOrders, setAllOrders] = useState([]);
 
   useEffect(() => {
-    axios.get("https://docker-setup-backend-latest.onrender.com/allOrders")
+    axios.get(`${import.meta.env.VITE_DATA_API_URL}/orders`)
       .then((res) => {
-        setAllOrders(res.data);
+        setAllOrders(res.data.data);
       })
       .catch((err) => {
         console.error("Error fetching orders:", err);

@@ -14,7 +14,7 @@ const BuyActionWindow = ({ uid }) => {
   const { closeBuyWindow } = useContext(GeneralContext);
 
   const handleBuyClick = () => {
-    axios.post("https://docker-setup-backend-latest.onrender.com/newOrders", {
+    axios.post(`${import.meta.env.VITE_DATA_API_URL}/orders`, {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,
