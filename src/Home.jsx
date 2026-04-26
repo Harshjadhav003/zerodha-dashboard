@@ -18,7 +18,8 @@ const Home = () => {
     const verifyUser = async () => {
       try {
         const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/verify`
+          `${import.meta.env.VITE_API_URL}/verify`,
+          { withCredentials: true }
         );
 
         if (!data.success) {
