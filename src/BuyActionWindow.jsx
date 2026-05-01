@@ -11,7 +11,7 @@ const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
-  const { closeBuyWindow, openSellWindow } = useContext(GeneralContext);
+  const { closeBuyWindow } = useContext(GeneralContext);
 const handleBuyClick = async () => {
   try {
     await axios.post(
@@ -79,8 +79,6 @@ const handleBuyClick = async () => {
           <button className="btn btn-blue" onClick={handleBuyClick}>
             Buy
            </button>
-
-           <button onClick={() => openSellWindow(uid)}>Sell</button>
 
           <button className="btn btn-grey" onClick={handleCancelClick}>
             Cancel

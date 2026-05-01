@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import "./BuyActionWindow.css";
+
 const SellActionWindow = ({ uid, closeSellWindow }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0);
@@ -34,26 +36,43 @@ const SellActionWindow = ({ uid, closeSellWindow }) => {
   }
 };
   return (
-    <div className="buy-window"> {/* you can reuse same CSS */}
-      <h3>Sell {uid}</h3>
+    <div className="container" id="sell-window" draggable="true">
+      <div className="regular-order">
+        <div className="inputs">
+          <fieldset>
+            <legend>Qty.</legend>
+            <input
+              type="number"
+              name="qty"
+              id="qty"
+              onChange={(e) => setStockQuantity(Number(e.target.value))}
+              value={stockQuantity}
+            />
+          </fieldset>
+          <fieldset>
+            <legend>Price</legend>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              step="0.05"
+              onChange={(e) => setStockPrice(Number(e.target.value))}
+              value={stockPrice}
+            />
+          </fieldset>
+        </div>
+      </div>
 
-      <input
-  type="number"
-  value={stockQuantity}
-  onChange={(e) => setStockQuantity(Number(e.target.value))}
-  placeholder="Quantity"
-/>
-
-<input
-  type="number"
-  value={stockPrice}
-  onChange={(e) => setStockPrice(Number(e.target.value))}
-  placeholder="Price"
-/>
-
-      <div>
-        <button onClick={handleSellClick}>Sell</button>
-        <button onClick={closeSellWindow}>Cancel</button>
+      <div className="buttons">
+        <span>Margin required ₹140.65</span>
+        <div>
+          <button className="btn btn-orange" onClick={handleSellClick}>
+            Sell
+          </button>
+          <button className="btn btn-grey" onClick={closeSellWindow}>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );
