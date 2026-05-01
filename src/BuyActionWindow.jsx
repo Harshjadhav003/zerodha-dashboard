@@ -11,18 +11,35 @@ const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
-  const { closeBuyWindow } = useContext(GeneralContext);
+  const { closeBuyWindow, openSellWindow } = useContext(GeneralContext);
+const handleBuyClick = async () => {
+  try {
+    await axios.post(
+      `${import.meta.env.VITE_DATA_API_URL}/orders`,
+      {
+        name: uid,
+        qty: stockQuantity,
+        price: stockPrice,
+        mode: "BUY",
+      },
+      { 
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }
+  },
+      {
+        withCredentials: true,
+      }
+    );
 
-  const handleBuyClick = () => {
-    axios.post(`${import.meta.env.VITE_DATA_API_URL}/orders`, {
-      name: uid,
-      qty: stockQuantity,
-      price: stockPrice,
-      mode: "BUY",
-    });
+    console.log("Order created");
 
-    closeBuyWindow();
-  };
+  } catch (err) {
+    console.error("Order failed:", err.response?.data || err.message);
+  } finally {
+    closeBuyWindow(); //  always runs
+  }
+};
 
   const handleCancelClick = () => {
     closeBuyWindow();
@@ -62,6 +79,8 @@ const BuyActionWindow = ({ uid }) => {
           <button className="btn btn-blue" onClick={handleBuyClick}>
             Buy
            </button>
+
+           <button onClick={() => openSellWindow(uid)}>Sell</button>
 
           <button className="btn btn-grey" onClick={handleCancelClick}>
             Cancel

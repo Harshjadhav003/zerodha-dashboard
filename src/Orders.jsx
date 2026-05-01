@@ -6,7 +6,9 @@ const Orders = () => {
   const [allOrders, setAllOrders] = useState([]);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_DATA_API_URL}/orders`)
+   axios.get(`${import.meta.env.VITE_DATA_API_URL}/orders`, {
+  withCredentials: true,
+})
       .then((res) => {
         setAllOrders(res.data.data);
       })

@@ -8,8 +8,11 @@ const Holdings = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_DATA_API_URL}/holdings`)
+    axios.get(`${import.meta.env.VITE_DATA_API_URL}/holdings`, {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+})
       .then((res) => {
         setAllHoldings(res.data.data);
         setLoading(false);
@@ -37,7 +40,7 @@ const Holdings = () => {
     ? ((pnl / totalInvestment) * 100).toFixed(2)
     : 0;
 
-  // 📊 Graph Data
+  //  Graph Data
   const labels = allHoldings.map((stock) => stock.name);
 
   const data = {
@@ -51,7 +54,7 @@ const Holdings = () => {
     ],
   };
 
-  // ⏳ Loading UI
+  //  Loading UI
   if (loading) return <h3>Loading holdings...</h3>;
 
   //  Error UI
@@ -113,7 +116,7 @@ const Holdings = () => {
         </table>
       </div>
 
-      {/* 📊 Summary Section */}
+      {/*  Summary Section */}
       <div className="row">
         <div className="col">
           <h5>{totalInvestment.toFixed(2)}</h5>
@@ -133,7 +136,7 @@ const Holdings = () => {
         </div>
       </div>
 
-      {/* 📊 Graph */}
+      {/*  Graph */}
       <VerticalGraph data={data} />
     </>
   );
