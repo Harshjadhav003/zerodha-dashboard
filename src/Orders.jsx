@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { socket } from "./socket";
 
 const Orders = () => {
   const [allOrders, setAllOrders] = useState([]);
 
-  useEffect(() => {
-   axios.get(`${import.meta.env.VITE_DATA_API_URL}/orders`, {
-  withCredentials: true,
-})
-      .then((res) => {
-        setAllOrders(res.data.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching orders:", err);
-      });
-  }, []);
+
+useEffect(() => {
+  // 🔹 Initial fetch
+  axios.get(`${import.meta.env.VITE_DATA_API_URL}/orders`, {
+    withCredentials: true,
+  })
+    .then((res) => {
+      setAllOrders(res.data.data);
+    })
+    .catch((err) => {
+      console.error("Error fetching orders:", err);
+    });
+
+  // 🔥 REAL-TIME ORDER UPDATE
+  socket.on("orderUpdate", (newOrder) => {
+    console.log("Live Order:", newOrder);
+
+    setAllOrders((prev) => [newOrder.data, ...prev]);
+  });
+
+  // cleanup
+  return () => {
+    socket.off("orderUpdate");
+  };
+}, []);
 
   return (
     <div className="orders">
