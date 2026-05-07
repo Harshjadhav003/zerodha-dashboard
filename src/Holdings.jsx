@@ -1,28 +1,45 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { VerticalGraph } from "./VerticalGraph";
+import { socket } from "./socket";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    axios.get(`${import.meta.env.VITE_DATA_API_URL}/holdings`, {
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-})
-      .then((res) => {
-        setAllHoldings(res.data.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setError("Failed to load holdings");
-        setLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  //  Initial API fetch
+  axios.get(`${import.meta.env.VITE_DATA_API_URL}/holdings`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  })
+    .then((res) => {
+      setAllHoldings(res.data.data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setError("Failed to load holdings");
+      setLoading(false);
+    });
+
+  //  REAL-TIME PRICE UPDATE
+  socket.on("holdings_update", (prices) => {
+    setAllHoldings((prev) =>
+      prev.map((stock) => ({
+        ...stock,
+        price: prices[stock.name] || stock.price,
+      }))
+    );
+  });
+
+  // cleanup
+  return () => {
+    socket.off("holdings_update");
+  };
+}, []);
 
   //  Calculations
   const totalInvestment = allHoldings.reduce(
