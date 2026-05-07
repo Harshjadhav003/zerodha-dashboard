@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import { socket } from "./socket"; 
+
+
 //import { positions } from "../data/data.js";
 
 const Positions = () => {
     const [allPositions, setAllPositions] = useState([]);
 
+
 useEffect(() => {
+  // Initial fetch
   axios.get(`${import.meta.env.VITE_DATA_API_URL}/positions`)
     .then((res) => {
       setAllPositions(res.data.data);
@@ -14,6 +19,33 @@ useEffect(() => {
     .catch((err) => {
       console.log("ERROR:", err);
     });
+
+  //  LIVE PRICE UPDATE (for LTP)
+  socket.on("price_update", (prices) => {
+    setAllPositions((prev) =>
+      prev.map((pos) => ({
+        ...pos,
+        price: prices[pos.name] || pos.price,
+      }))
+    );
+  });
+
+  //  LIVE ORDER UPDATE (when buy/sell happens)
+  socket.on("positions_update", (update) => {
+    console.log("positions_update:", update);
+
+    // simple approach: refetch positions
+    axios.get(`${import.meta.env.VITE_DATA_API_URL}/positions`)
+      .then((res) => {
+        setAllPositions(res.data.data);
+      });
+  });
+
+  // cleanup
+  return () => {
+    socket.off("positions_update");
+    socket.off("orderUpdate");
+  };
 }, []);
   return (
     <>
