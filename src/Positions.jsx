@@ -9,10 +9,10 @@ import { socket } from "./socket";
 const Positions = () => {
     const [allPositions, setAllPositions] = useState([]);
 
-
 useEffect(() => {
   // Initial fetch
-  axios.get(`${import.meta.env.VITE_DATA_API_URL}/positions`)
+  axios
+    .get(`${import.meta.env.VITE_DATA_API_URL}/positions`)
     .then((res) => {
       setAllPositions(res.data.data);
     })
@@ -20,7 +20,7 @@ useEffect(() => {
       console.log("ERROR:", err);
     });
 
-  //  LIVE PRICE UPDATE (for LTP)
+  // LIVE PRICE UPDATE
   socket.on("price_update", (prices) => {
     setAllPositions((prev) =>
       prev.map((pos) => ({
@@ -30,12 +30,12 @@ useEffect(() => {
     );
   });
 
-  //  LIVE ORDER UPDATE (when buy/sell happens)
-  socket.on("positions_update", (update) => {
-    console.log("positions_update:", update);
+  // LIVE POSITION UPDATE
+  socket.on("positions_update", () => {
+    console.log("positions updated");
 
-    // simple approach: refetch positions
-    axios.get(`${import.meta.env.VITE_DATA_API_URL}/positions`)
+    axios
+      .get(`${import.meta.env.VITE_DATA_API_URL}/positions`)
       .then((res) => {
         setAllPositions(res.data.data);
       });
@@ -43,8 +43,8 @@ useEffect(() => {
 
   // cleanup
   return () => {
+    socket.off("price_update");
     socket.off("positions_update");
-    socket.off("orderUpdate");
   };
 }, []);
   return (

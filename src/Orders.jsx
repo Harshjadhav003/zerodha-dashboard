@@ -8,7 +8,7 @@ const Orders = () => {
 
 
 useEffect(() => {
-  // 🔹 Initial fetch
+  //  Initial fetch
   axios.get(`${import.meta.env.VITE_DATA_API_URL}/orders`, {
     withCredentials: true,
   })
@@ -19,12 +19,12 @@ useEffect(() => {
       console.error("Error fetching orders:", err);
     });
 
-  // 🔥 REAL-TIME ORDER UPDATE
-  socket.on("orderUpdate", (newOrder) => {
-    console.log("Live Order:", newOrder);
-
-    setAllOrders((prev) => [newOrder.data, ...prev]);
-  });
+  //  REAL-TIME ORDER UPDATE
+ socket.on("orderUpdate", (update) => {
+  if (update.status === "EXECUTED") {
+    setAllOrders((prev) => [update.data, ...prev]);
+  }
+});
 
   // cleanup
   return () => {

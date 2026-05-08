@@ -26,7 +26,7 @@ useEffect(() => {
     });
 
   //  REAL-TIME PRICE UPDATE
-  socket.on("holdings_update", (prices) => {
+  socket.on("price_update", (prices) => {
     setAllHoldings((prev) =>
       prev.map((stock) => ({
         ...stock,
@@ -37,7 +37,7 @@ useEffect(() => {
 
   // cleanup
   return () => {
-    socket.off("holdings_update");
+    socket.off("price_update");
   };
 }, []);
 
