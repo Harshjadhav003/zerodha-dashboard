@@ -22,13 +22,11 @@ const handleBuyClick = async () => {
         price: stockPrice,
         mode: "BUY",
       },
-      { 
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    }
-  },
       {
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       }
     );
 
