@@ -73,10 +73,10 @@ useEffect(() => {
                                <td>{stock.product}</td>
                                <td>{stock.name}</td>
                                <td>{stock.qty}</td>
-                               <td>{stock.avg.toFixed(2)}</td>
-                               <td>{stock.price.toFixed(2)}</td>
+                               <td>{(stock.avg || 0).toFixed(2)}</td>
+                               <td>{(stock.price || 0).toFixed(2)}</td>
                                <td className={profClass}>
-                                 {(curValue - stock.avg * stock.qty).toFixed(2)}
+                                 {(curValue - (stock.avg || 0) * stock.qty).toFixed(2)}
                                </td>
                                <td className={dayClass}>{stock.day}</td>
                              </tr>
