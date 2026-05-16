@@ -22,8 +22,8 @@ const SellActionWindow = ({ uid, closeSellWindow }) => {
         price: stockPrice,
         mode: "SELL",
       },
-      
       {
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
