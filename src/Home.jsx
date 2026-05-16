@@ -17,9 +17,26 @@ const Home = () => {
   useEffect(() => {
     const verifyUser = async () => {
       try {
+        // Extract token from URL if redirected from login page (cross-origin fallback)
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlToken = urlParams.get("token");
+        
+        if (urlToken) {
+          localStorage.setItem("token", urlToken);
+          // Clean up URL
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        const token = localStorage.getItem("token");
+
         const { data } = await axios.get(
           `${import.meta.env.VITE_API_URL}/verify`,
-          { withCredentials: true }
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: token ? `Bearer ${token}` : "",
+            },
+          }
         );
 
         if (!data.success) {
@@ -40,15 +57,24 @@ const Home = () => {
   }, [navigate]);
 
   const handleLogout = async () => {
+    const token = localStorage.getItem("token");
+    
     try {
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/logout`
+        `${import.meta.env.VITE_API_URL}/logout`,
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
       );
-
-      window.location.replace(`${import.meta.env.VITE_FRONTEND_URL}/login`);
-
     } catch (error) {
-      console.error(error);
+      console.error("Logout API error:", error);
+    } finally {
+      localStorage.removeItem("token");
+      window.location.replace(`${import.meta.env.VITE_FRONTEND_URL}/login`);
     }
   };
 
