@@ -9,11 +9,15 @@ const Orders = () => {
 
 useEffect(() => {
   //  Initial fetch
+  const token = localStorage.getItem("token");
   axios.get(`${import.meta.env.VITE_DATA_API_URL}/orders`, {
     withCredentials: true,
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
   })
     .then((res) => {
-      setAllOrders(res.data.data);
+      setAllOrders(res.data.data || []);
     })
     .catch((err) => {
       console.error("Error fetching orders:", err);
@@ -62,7 +66,7 @@ useEffect(() => {
                     <tr key={index}>
                       <td>{order.name}</td>
                       <td>{order.qty}</td>
-                      <td>{order.price.toFixed(2)}</td>
+                      <td>{(order.price || 0).toFixed(2)}</td>
                       <td>{order.mode}</td>
                     </tr>
                   );
