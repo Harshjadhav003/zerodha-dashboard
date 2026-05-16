@@ -102,21 +102,21 @@ useEffect(() => {
               const profit = curValue - stock.avg * stock.qty;
               const isProfit = profit >= 0;
 
-              const netPercent = (
-                ((stock.price - stock.avg) / stock.avg) *
-                100
+              const netPercent = (stock.avg 
+                ? ((stock.price - stock.avg) / stock.avg) * 100 
+                : 0
               ).toFixed(2);
 
               return (
                 <tr key={stock._id}>
                   <td>{stock.name}</td>
                   <td>{stock.qty}</td>
-                  <td>{stock.avg.toFixed(2)}</td>
-                  <td>{stock.price.toFixed(2)}</td>
-                  <td>{curValue.toFixed(2)}</td>
+                  <td>{(stock.avg || 0).toFixed(2)}</td>
+                  <td>{(stock.price || 0).toFixed(2)}</td>
+                  <td>{(curValue || 0).toFixed(2)}</td>
 
                   <td className={isProfit ? "profit" : "loss"}>
-                    {profit.toFixed(2)}
+                    {(profit || 0).toFixed(2)}
                   </td>
 
                   <td className={isProfit ? "profit" : "loss"}>
@@ -136,18 +136,18 @@ useEffect(() => {
       {/*  Summary Section */}
       <div className="row">
         <div className="col">
-          <h5>{totalInvestment.toFixed(2)}</h5>
+          <h5>{(totalInvestment || 0).toFixed(2)}</h5>
           <p>Total investment</p>
         </div>
 
         <div className="col">
-          <h5>{currentValue.toFixed(2)}</h5>
+          <h5>{(currentValue || 0).toFixed(2)}</h5>
           <p>Current value</p>
         </div>
 
         <div className="col">
           <h5 className={pnl >= 0 ? "profit" : "loss"}>
-            {pnl.toFixed(2)} ({pnlPercent}%)
+            {(pnl || 0).toFixed(2)} ({pnlPercent}%)
           </h5>
           <p>P&L</p>
         </div>
