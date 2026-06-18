@@ -1,60 +1,51 @@
 # 📊 Zerodha Dashboard
 
-> Data visualization service for Zerodha Clone.
+A React & Vite based trading dashboard for the Zerodha Clone ecosystem, providing portfolio analytics, holdings management, positions tracking, and real-time market visualization.
 
----
+🌐 **Live Demo:** https://zerodha-dashboard-iota.vercel.app
 
 ## 🚀 Features
 
-* 📈 Interactive Charts
-* 📊 Stock Data Visualization
-* 💼 Portfolio Analytics
-* ⚡ Real-time UI updates (if implemented)
-
----
+* Interactive portfolio analytics
+* Holdings & positions management
+* Watchlist tracking
+* Recharts-based visualizations
+* JWT-authenticated API integration
+* WebSocket support for real-time updates
+* Dockerized deployment
 
 ## 🛠️ Tech Stack
 
 * React.js
-* Chart.js / Recharts
+* Vite
 * Axios
+* Recharts
+* WebSocket
+* Docker
 
----
-
-## ⚙️ Setup Instructions
+## ⚙️ Installation
 
 ```bash
 git clone https://github.com/Harshjadhav003/zerodha-dashboard.git
 cd zerodha-dashboard
 npm install
-npm start
+npm run dev
 ```
 
-App runs on:
-👉 http://localhost:5174 (or your port)
+## 🐳 Docker
 
----
+```bash
+docker build -t zerodha-dashboard .
+docker run -p 5174:5174 zerodha-dashboard
+```
 
-## 📊 Functionality
+## 🔗 Related Projects
 
-* Displays stock trends
-* Shows portfolio performance
-* Visualizes trading data
+* Backend: https://github.com/Harshjadhav003/zerodha-backend
+* Main Project: https://github.com/Harshjadhav003/ZERODHA
 
----
+## 👨‍💻 Author
 
-## 🔗 Connected Services
+**Harsh Jadhav**
 
-* Backend API → provides data
-
----
-
-## 📌 Notes
-
-* Backend must be running
-* Uses REST APIs
-
----
-
-👉  Part of Zerodha Microservices Project
-🔗 Main Repo: https://github.com/Harshjadhav003/ZERODHA
+Full Stack Developer | MERN | Docker | System Design
